@@ -15,6 +15,6 @@ int maiorElemento (TLista* lista, int*, int*);
 TLista* pares(TLista*);
 TLista* juncao(TLista*);
 TLista* inverte(TLista*);
-
+TLista* merge(TLista*, TLista*);
 
 #endif
