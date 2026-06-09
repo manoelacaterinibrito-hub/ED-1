@@ -60,7 +60,8 @@ int main(){
     print(reposta3);    
 
     //questão 7
-    
+    TLista* reposta4= merge(lista1, lista2);
+    print(reposta4);
 
 }
  

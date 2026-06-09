@@ -227,18 +227,66 @@ TLista* inverte(TLista* lista){
 //ordenada e sem elementos repetidos. A função deverá receber as duas listas por parâmetro e
 //criar e retornar uma terceira lista com o resultado.
 TLista* merge(TLista* lista, TLista* lista2){
-    TLista* L3 = criarLista();
+    TLista* L3;
     Tno* aux = lista->inicio;
     Tno* aux2 = lista2->inicio;
 
+    //variaveis:
+    int ultimo; //guarda o ultimo valor a ser inserido
+    int primeiro=1; // indica se ainda não foi inserido nenhum elemento
+
+    //percorre as duas listas ao mesmo tempo
+    while(aux!=NULL && aux2!=NULL){
+        int valor;
+        //se auxiliadora 1 for menor então
+        if(aux->info < aux2->info){
+            //guarda valor
+            //avança na lista
+            valor = aux->info;
+            aux = aux->info;
+        //se não, a auxliador 2 for maior
+        }else if(aux->info > aux2->info){
+            //guarda valor
+            //avança na lista
+            valor = aux->info;
+            aux2=aux2->info;
+        //se não, as duas forem iguais    
+        }else if(aux->info == aux2->info){
+            //guarda valor 
+            //e avança nas duas
+            valor=aux->info;
+            aux=aux->info;
+            aux2=aux2->info;
+        }
+        //aqui começa a inserir
+        // e so vai inserir se é o primeiro elemento ou diferente do ultimo
+        if(primeiro || valor!=ultimo){
+        inserir(L3, valor);
+        //atualiza o ultimo valor pro proximo loop
+        ultimo = valor;
+        //a partir daqui ja existe elemento na lista
+        primeiro = 0;
+        }
+    }
+    // Caso ainda sobrem elementos na lista1
     while(aux!=NULL){
-        inserir(lista, aux->info);
+        // Evita inserir valores repetidos
+        if(primeiro || aux->info != ultimo){
+            inserir(L3, aux->info);
+            ultimo = aux->info;
+            primeiro = 0;
+        }
         aux = aux->prox;
     }
-    while(aux2!=NULL){
-        inserir(lista2, aux2->info);
-        aux2 = aux2->prox;
-    }
 
+   //mesma coisa com a lista 2
+    while(aux2!=NULL){
+        if(primeiro || aux2->info!=ultimo){
+            inserir(L3, aux2->info);
+            ultimo = aux2->info;
+            primeiro=0;
+        }
+        aux2=aux2->info;
+    }
     return L3;
 }
